@@ -1,0 +1,2 @@
+Temp/ScriptUpdater/1776816796\837995227_JsonStringBuffer.cs => Library/PackageCache/com.unity.serialization@1.7.0-preview.1/Runtime/Unity.Serialization/Json/JsonStringBuffer.cs
+Temp/ScriptUpdater/1776816796\2109238139_JsonWriter.cs => Library/PackageCache/com.unity.serialization@1.7.0-preview.1/Runtime/Unity.Serialization/Json/JsonWriter.cs

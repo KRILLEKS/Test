@@ -41,7 +41,15 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\ReactionTest.cs" />
+    <Analyzer Include="Packages/com.unity.entities/Unity.Entities/SourceGenerators/Unity.Entities.SourceGen.JobEntity.dll" />
+    <Analyzer Include="Packages/com.unity.entities/Unity.Entities/SourceGenerators/Unity.Entities.SourceGen.SystemGenerator.dll" />
+    <Analyzer Include="Packages/com.unity.entities/Unity.Entities/SourceGenerators/Unity.Entities.SourceGen.LambdaJobs.dll" />
+    <Analyzer Include="Packages/com.unity.entities/Unity.Entities/SourceGenerators/Unity.Entities.SourceGen.Sample.dll" />
+    <Analyzer Include="Packages/com.unity.entities/Unity.Entities/SourceGenerators/Unity.Entities.SourceGen.Common.dll" />
+    <Analyzer Include="Packages/com.unity.entities/Unity.Entities/SourceGenerators/Unity.Entities.SourceGen.AuthoringComponent.dll" />
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Scripts\Pathfinding.cs" />
      <Reference Include="UnityEngine">
      <HintPath>F:/Unity/2021.1.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
      </Reference>
@@ -278,6 +286,30 @@
      </Reference>
      <Reference Include="Newtonsoft.Json">
      <HintPath>D:/GitHub/Test/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Burst.Cecil.Rocks">
+     <HintPath>D:/GitHub/Test/Library/PackageCache/com.unity.burst@1.6.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.Rocks.dll</HintPath>
+     </Reference>
+     <Reference Include="Mono.Cecil">
+     <HintPath>D:/GitHub/Test/Library/PackageCache/com.unity.nuget.mono-cecil@1.10.1/Mono.Cecil.dll</HintPath>
+     </Reference>
+     <Reference Include="ExternalCSharpCompiler">
+     <HintPath>D:/GitHub/Test/Library/PackageCache/com.unity.roslyn@0.2.1-preview/ExternalCSharpCompiler.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Collections.LowLevel.ILSupport">
+     <HintPath>D:/GitHub/Test/Library/PackageCache/com.unity.collections@1.2.3/Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Burst.Cecil.Pdb">
+     <HintPath>D:/GitHub/Test/Library/PackageCache/com.unity.burst@1.6.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.Pdb.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Burst.Cecil.Mdb">
+     <HintPath>D:/GitHub/Test/Library/PackageCache/com.unity.burst@1.6.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.Mdb.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Burst.Unsafe">
+     <HintPath>D:/GitHub/Test/Library/PackageCache/com.unity.burst@1.6.4/Unity.Burst.Unsafe.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Burst.Cecil">
+     <HintPath>D:/GitHub/Test/Library/PackageCache/com.unity.burst@1.6.4/Unity.Burst.CodeGen/Unity.Burst.Cecil.dll</HintPath>
      </Reference>
      <Reference Include="netstandard">
      <HintPath>F:/Unity/2021.1.11f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -740,6 +772,90 @@
      </Reference>
      <Reference Include="Unity.VisualScripting.State">
      <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Properties.UI.Editor">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Properties.UI.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Scenes">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Scenes.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Entities.BuildUtils">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Entities.BuildUtils.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Properties.UI">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Properties.UI.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Entities.Hybrid.HybridComponents">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Entities.Hybrid.HybridComponents.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Serialization">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Serialization.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Jobs">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Jobs.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Properties">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Properties.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Scenes.Editor">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Scenes.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Collections">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Collections.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Mathematics.Extensions">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Mathematics.Extensions.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Entities">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Entities.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Serialization.Editor">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Serialization.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Burst.Editor">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Mathematics.Extensions.Hybrid">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Mathematics.Extensions.Hybrid.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ScriptableBuildPipeline">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Deformations">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Deformations.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.CacheServer">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/UnityEditor.CacheServer.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Jobs.Editor">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Jobs.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Entities.Editor.Properties">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Entities.Editor.Properties.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Entities.Hybrid.EndToEnd.Tests">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Entities.Hybrid.EndToEnd.Tests.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Profiling.Core">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Profiling.Core.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Entities.Editor">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Entities.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Entities.Hybrid">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Entities.Hybrid.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Transforms.Hybrid">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Burst">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Transforms">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.Transforms.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ScriptableBuildPipeline.Editor">
+     <HintPath>D:/GitHub/Test/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
      </Reference>
   </ItemGroup>
   <ItemGroup>
