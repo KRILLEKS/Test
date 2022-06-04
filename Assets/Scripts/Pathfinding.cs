@@ -8,7 +8,7 @@ using System.Linq;
 // I wanted to use DOTS to make pathfinding (using A* pathfinding algorithm) cause it'll have better performance
 // but I saw that ECS is forbidden although my solution won't be too different
 // I'll use list/array instead of Native list/array and I won't use jobs
-public class Pathfinding : MonoBehaviour
+public class Pathfinding
 {
    private struct PathNode
    {
