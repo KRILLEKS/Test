@@ -4,6 +4,7 @@ using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 // I wanted to use DOTS to make pathfinding (using A* pathfinding algorithm) cause it'll have better performance
 // but I saw that ECS is forbidden although my solution won't be too different
@@ -36,7 +37,7 @@ public class Pathfinding
       }
    }
 
-   private readonly int2[] neighbourOffsetsArray =
+   private static readonly int2[] neighbourOffsetsArray =
    {
       new (1, 0), // right
       new (-1, 0), // left 
@@ -48,8 +49,10 @@ public class Pathfinding
       new (-1, -1), // left down
    };
 
-   private void FindPath(int2 startPosition, int2 endPosition)
+   public static List<int2> FindPath(int2 startPosition, int2 endPosition)
    {
+      Debug.Log($"startPos: {startPosition} endPos: {endPosition}");
+      
       PathNode[] pathNodeArray = new PathNode[Constants.GRID_SIZE.x * Constants.GRID_SIZE.y];
 
       InitializeArray();
@@ -60,7 +63,6 @@ public class Pathfinding
       pathNodeArray[startNode.index] = startNode;
 
       int endNodeIndex = CalculateIndex(endPosition.x, endPosition.y);
-      PathNode endNode = pathNodeArray[endNodeIndex];
 
       List<int> openList = new List<int>();
       List<int> closedList = new List<int>();
@@ -75,7 +77,9 @@ public class Pathfinding
 
          // reached end
          if (currentNode.index == endNodeIndex)
+         {
             break;
+         }
 
          // remove current node from list
          openList.RemoveAt(openList.FindIndex(_ => _ == currentNodeIndex));
@@ -87,11 +91,14 @@ public class Pathfinding
          {
             int2 neighbourPos = new int2(currentNode.x + neighbourOffsetsArray[i].x, currentNode.y + neighbourOffsetsArray[i].y);
             int neighbourIndex = CalculateIndex(neighbourPos.x, neighbourPos.y);
+            
+            if (isPositionInsideGrid(neighbourPos) == false)
+               continue;
+            
             PathNode neighbourNode = pathNodeArray[neighbourIndex];
 
             // check if node is valid
-            if (isPositionInsideGrid(neighbourPos) == false ||
-                closedList.Contains(neighbourIndex) ||
+            if (closedList.Contains(neighbourIndex) ||
                 pathNodeArray[neighbourIndex].isWalkable == false)
                continue;
 
@@ -110,11 +117,15 @@ public class Pathfinding
          }
       }
 
+      PathNode endNode = pathNodeArray[endNodeIndex];
       if (endNode.cameFromNodeIndex != -1)
       {
          List<int2> path = CalculatePath();
          path.Reverse();
+         return path;
       }
+
+      return null;
 
       void InitializeArray()
       {
@@ -182,7 +193,7 @@ public class Pathfinding
          while (currentNode.cameFromNodeIndex != -1)
          {
             PathNode cameFromNode = pathNodeArray[currentNode.cameFromNodeIndex];
-            path.Add(cameFromNode.index);
+            path.Add(new int2(cameFromNode.x, cameFromNode.y));
             currentNode = cameFromNode;
          }
 

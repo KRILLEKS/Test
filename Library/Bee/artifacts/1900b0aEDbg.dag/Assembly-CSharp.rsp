@@ -373,7 +373,10 @@
 "Assets/Scripts/CameraController.cs"
 "Assets/Scripts/Constants.cs"
 "Assets/Scripts/GenerateGrid.cs"
+"Assets/Scripts/InputController.cs"
 "Assets/Scripts/Pathfinding.cs"
+"Assets/Scripts/PlayerMovementController.cs"
+"Assets/Scripts/TEST.cs"
 -langversion:9.0
 
 /deterministic
