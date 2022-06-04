@@ -7,9 +7,11 @@ using UnityEngine;
 public class PlayerMovementController : MonoBehaviour
 {
    [SerializeField] private float speed;
-   
+
    // private variables
    private GameObject _character;
+   private Coroutine _moveCoroutine;
+   private List<Vector3> _path;
 
    private void Awake()
    {
@@ -19,15 +21,24 @@ public class PlayerMovementController : MonoBehaviour
    // invokes on left click (in input controller event)
    public void Move()
    {
-      var path =
-         Pathfinding.FindPath(new int2(Mathf.FloorToInt(_character.transform.position.x),
-                                       Mathf.FloorToInt(_character.transform.position.z)),
-                              new int2(Mathf.FloorToInt(InputController.mousePosition.x),
-                                       Mathf.FloorToInt(InputController.mousePosition.z)));
+      _path = Pathfinding.FindPath(new int2(Mathf.FloorToInt(_character.transform.position.x),
+                                            Mathf.FloorToInt(_character.transform.position.z)),
+                                   new int2(Mathf.FloorToInt(InputController.mousePosition.x),
+                                            Mathf.FloorToInt(InputController.mousePosition.z)));
 
-      foreach (var p in path)
-      {
-         Debug.Log(p);
-      }
+      Debug.Log(_path.Count);
+      _moveCoroutine = StartCoroutine(moveCoroutine());
+   }
+
+   private IEnumerator moveCoroutine()
+   {
+      foreach (var point in _path)
+         while (_character.transform.position != point + Constants.OFFSET)
+         {
+            _character.transform.position = Vector3.MoveTowards(_character.transform.position,
+                                                                point + Constants.OFFSET,
+                                                                speed * Time.deltaTime);
+            yield return null;
+         }
    }
 }

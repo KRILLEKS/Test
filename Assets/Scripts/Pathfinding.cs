@@ -49,7 +49,7 @@ public class Pathfinding
       new (-1, -1), // left down
    };
 
-   public static List<int2> FindPath(int2 startPosition, int2 endPosition)
+   public static List<Vector3> FindPath(int2 startPosition, int2 endPosition)
    {
       Debug.Log($"startPos: {startPosition} endPos: {endPosition}");
       
@@ -120,7 +120,7 @@ public class Pathfinding
       PathNode endNode = pathNodeArray[endNodeIndex];
       if (endNode.cameFromNodeIndex != -1)
       {
-         List<int2> path = CalculatePath();
+         List<Vector3> path = CalculatePath();
          path.Reverse();
          return path;
       }
@@ -184,16 +184,16 @@ public class Pathfinding
                 gridPosition.y >= 0 && gridPosition.y < Constants.GRID_SIZE.y;
       }
 
-      List<int2> CalculatePath()
+      // we don't include start pos
+      List<Vector3> CalculatePath()
       {
-         var path = new List<int2>();
-         path.Add(new int2 (endNode.x,endNode.y));
-
+         var path = new List<Vector3>();
          PathNode currentNode = endNode;
+         
          while (currentNode.cameFromNodeIndex != -1)
          {
             PathNode cameFromNode = pathNodeArray[currentNode.cameFromNodeIndex];
-            path.Add(new int2(cameFromNode.x, cameFromNode.y));
+            path.Add(new Vector3(currentNode.x,Constants.PLAYER_Y, currentNode.y));
             currentNode = cameFromNode;
          }
 
