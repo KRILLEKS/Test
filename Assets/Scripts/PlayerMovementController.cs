@@ -4,19 +4,24 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
+// attached to player
 public class PlayerMovementController : MonoBehaviour
 {
-   [SerializeField] private float speed;
+   [SerializeField] private float movementSpeed;
+   [SerializeField] private float rotationSpeed;
 
    // private variables
+   private Animator _animator;
    private GameObject _character;
    private Coroutine _moveCoroutine;
    private List<Vector3> _path;
    private bool _isWalking;
    private int _currentIndex2Walk;
+   private Quaternion _characterRotation;
 
    private void Awake()
    {
+      _animator = GetComponent<Animator>();
       _character = GameObject.FindWithTag($"Player");
    }
 
@@ -26,13 +31,18 @@ public class PlayerMovementController : MonoBehaviour
       // if we're walking we want to reach our current point and then walk towards another endNode to prevent issues
       if (_isWalking)
       {
-         // TODO: it isn't the best way to handle this. I guess it can be made better. Look for another solution (or think) if time left
-         _path = new List<Vector3> {_path[_currentIndex2Walk]};
-         _currentIndex2Walk = 0;
-         _path.AddRange(Pathfinding.FindPath(new int2(Mathf.FloorToInt(_character.transform.position.x),
-                                                      Mathf.FloorToInt(_character.transform.position.z)),
+         // we'll use path to find new one (one line below) so we can't override it yet
+         List<Vector3> _newPath = new List<Vector3> {_path[_currentIndex2Walk]};
+         // we'll finish movement to the current point only and afterwards we'll start movement to another endpoint
+         // because of that we start calculation from the current point which we move towards
+         _newPath.AddRange(Pathfinding.FindPath(new int2(Mathf.FloorToInt(_path[_currentIndex2Walk].x),
+                                                      Mathf.FloorToInt(_path[_currentIndex2Walk].z)),
                                              new int2(Mathf.FloorToInt(InputController.mousePosition.x),
                                                       Mathf.FloorToInt(InputController.mousePosition.z))));
+
+         _path = _newPath;
+         
+         _currentIndex2Walk = 0;
       }
       else
       {
@@ -47,18 +57,27 @@ public class PlayerMovementController : MonoBehaviour
    private IEnumerator moveCoroutine()
    {
       _isWalking = true;
-      
+      _animator.SetBool($"IsRun", true);
+
       for (_currentIndex2Walk = 0; _currentIndex2Walk < _path.Count; _currentIndex2Walk++)
       {
+         _characterRotation =
+            Quaternion.LookRotation(_path[_currentIndex2Walk] - _character.transform.position + Constants.OFFSET, Vector3.up);
+
          while (_character.transform.position != _path[_currentIndex2Walk] + Constants.OFFSET)
          {
             _character.transform.position = Vector3.MoveTowards(_character.transform.position,
                                                                 _path[_currentIndex2Walk] + Constants.OFFSET,
-                                                                speed * Time.deltaTime);
+                                                                movementSpeed * Time.deltaTime);
+
+            _character.transform.rotation =
+               Quaternion.Slerp(_character.transform.rotation, _characterRotation, rotationSpeed * Time.deltaTime);
+
             yield return null;
          }
       }
 
       _isWalking = false;
+      _animator.SetBool($"IsRun", false);
    }
 }

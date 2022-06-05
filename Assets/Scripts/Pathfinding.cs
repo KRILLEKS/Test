@@ -51,18 +51,21 @@ public class Pathfinding
 
    public static List<Vector3> FindPath(int2 startPosition, int2 endPosition)
    {
-      Debug.Log($"startPos: {startPosition} endPos: {endPosition}");
+      if (isPositionInsideGrid(endPosition) == false ||
+          GridHandler.isNodeWalkable[GridHandler.CalculateIndex(endPosition)] == false)
+         return new List<Vector3>();
       
       PathNode[] pathNodeArray = new PathNode[Constants.GRID_SIZE.x * Constants.GRID_SIZE.y];
 
       InitializeArray();
+      
 
-      PathNode startNode = pathNodeArray[CalculateIndex(startPosition.x, startPosition.y)];
+      PathNode startNode = pathNodeArray[GridHandler.CalculateIndex(startPosition)];
       startNode.gCost = 0;
       startNode.CalculateFCost();
       pathNodeArray[startNode.index] = startNode;
 
-      int endNodeIndex = CalculateIndex(endPosition.x, endPosition.y);
+      int endNodeIndex = GridHandler.CalculateIndex(endPosition);
 
       List<int> openList = new List<int>();
       List<int> closedList = new List<int>();
@@ -90,7 +93,7 @@ public class Pathfinding
          for (int i = 0; i < neighbourOffsetsArray.Length; i++)
          {
             int2 neighbourPos = new int2(currentNode.x + neighbourOffsetsArray[i].x, currentNode.y + neighbourOffsetsArray[i].y);
-            int neighbourIndex = CalculateIndex(neighbourPos.x, neighbourPos.y);
+            int neighbourIndex = GridHandler.CalculateIndex(neighbourPos);
             
             if (isPositionInsideGrid(neighbourPos) == false)
                continue;
@@ -135,24 +138,20 @@ public class Pathfinding
                PathNode pathNode = new PathNode();
                pathNode.x = x;
                pathNode.y = y;
-               pathNode.index = CalculateIndex(x, y);
+               pathNode.index = GridHandler.CalculateIndex(x, y);
 
-               // TODO: gCost looks strange for me
                pathNode.gCost = int.MaxValue; // we will change this so value doesn't really matter
                pathNode.hCost = CalculateDistanceCost(new int2(x, y), endPosition);
                pathNode.CalculateFCost();
 
-               pathNode.isWalkable = true;
+               pathNode.isWalkable = GridHandler.isNodeWalkable[pathNode.index];
                pathNode.cameFromNodeIndex = -1; // we'll use -1 as invalid value
 
                pathNodeArray[pathNode.index] = pathNode;
             }
       }
 
-      int CalculateIndex(int x, int y)
-      {
-         return x + y * Constants.GRID_SIZE.x;
-      }
+
 
       int CalculateDistanceCost(int2 aPos, int2 bPos)
       {
