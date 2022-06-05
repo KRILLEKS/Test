@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 
 // attached to player
 public class PlayerMovementController : MonoBehaviour
 {
    [SerializeField] private float movementSpeed;
    [SerializeField] private float rotationSpeed;
+   [SerializeField] private UnityEvent onStopEvent;
 
    // private variables
    private Animator _animator;
@@ -78,6 +80,7 @@ public class PlayerMovementController : MonoBehaviour
          }
       }
 
+      onStopEvent.Invoke();
       _isWalking = false;
       _animator.SetBool($"IsRun", false);
    }

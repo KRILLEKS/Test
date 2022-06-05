@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Constants
 {
+   public const float POINTS_PER_CRYSTAL = 10f;
+   
    // means that grid will be displaces on this value
    public static readonly Vector3 OFFSET = new Vector3(.5f, 0, .5f);
    // one tile size

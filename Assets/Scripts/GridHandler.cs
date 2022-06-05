@@ -11,7 +11,7 @@ public static class GridHandler
    public static readonly bool[] isNodeWalkable = new bool[Constants.GRID_SIZE.x * Constants.GRID_SIZE.y];
 
    /// <summary>
-   /// works only if cellPosition values are integers and also uses z as y
+   /// floor val to int and also uses z as y
    /// </summary>
    /// <param name="val"></param>
    /// <returns></returns>
@@ -27,8 +27,15 @@ public static class GridHandler
    {
       return x + y * Constants.GRID_SIZE.x;
    }
+   
+   // based on index
+   public static Vector3 CalculatePosition(int index)
+   {
+      return new Vector3(index % Constants.GRID_SIZE.x, 0,index / Constants.GRID_SIZE.x);
+   }
+   
    /// <summary>
-   /// works only if cellPosition values are integers and also uses z as y
+   /// floor val to int and also uses z as y
    /// </summary>
    /// <param name="cellPosition"></param>
    /// <returns></returns>
