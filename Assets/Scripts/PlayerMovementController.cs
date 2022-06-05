@@ -36,12 +36,12 @@ public class PlayerMovementController : MonoBehaviour
          // we'll finish movement to the current point only and afterwards we'll start movement to another endpoint
          // because of that we start calculation from the current point which we move towards
          _newPath.AddRange(Pathfinding.FindPath(new int2(Mathf.FloorToInt(_path[_currentIndex2Walk].x),
-                                                      Mathf.FloorToInt(_path[_currentIndex2Walk].z)),
-                                             new int2(Mathf.FloorToInt(InputController.mousePosition.x),
-                                                      Mathf.FloorToInt(InputController.mousePosition.z))));
+                                                         Mathf.FloorToInt(_path[_currentIndex2Walk].z)),
+                                                new int2(Mathf.FloorToInt(InputController.mousePosition.x),
+                                                         Mathf.FloorToInt(InputController.mousePosition.z))));
 
          _path = _newPath;
-         
+
          _currentIndex2Walk = 0;
       }
       else
@@ -50,7 +50,8 @@ public class PlayerMovementController : MonoBehaviour
                                                Mathf.FloorToInt(_character.transform.position.z)),
                                       new int2(Mathf.FloorToInt(InputController.mousePosition.x),
                                                Mathf.FloorToInt(InputController.mousePosition.z)));
-         _moveCoroutine = StartCoroutine(moveCoroutine());
+         if (_path.Count > 0)
+            _moveCoroutine = StartCoroutine(moveCoroutine());
       }
    }
 

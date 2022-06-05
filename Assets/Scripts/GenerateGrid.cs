@@ -72,7 +72,6 @@ public class GenerateGrid : MonoBehaviour
                   int size = Random.Range(minLength, maxLenght + 1);
                   int2 direction = directions[Random.Range(0, directions.Length)];
 
-                  Debug.Log(size);
                   for (int i = 0; i < size; i++)
                   {
                      Vector3 position = new Vector3(x, Constants.PLAYER_Y, y) + new Vector3(i * direction.x, 0, i * direction.y);

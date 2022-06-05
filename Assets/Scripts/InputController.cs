@@ -19,6 +19,7 @@ public class InputController : MonoBehaviour
 
    private void Update()
    {
+      // TODO: prevent clicking through UI
       // handle keys press
       if (Input.GetKeyDown(KeyCode.Mouse0))
          onLeftClick.Invoke();

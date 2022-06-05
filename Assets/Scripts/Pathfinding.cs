@@ -51,14 +51,18 @@ public class Pathfinding
 
    public static List<Vector3> FindPath(int2 startPosition, int2 endPosition)
    {
-      if (isPositionInsideGrid(endPosition) == false ||
-          GridHandler.isNodeWalkable[GridHandler.CalculateIndex(endPosition)] == false)
+      if (isPositionInsideGrid(endPosition) == false)
          return new List<Vector3>();
       
       PathNode[] pathNodeArray = new PathNode[Constants.GRID_SIZE.x * Constants.GRID_SIZE.y];
 
       InitializeArray();
-      
+
+      // we separate this from condition above cause we want to call Initialize array at least once
+      // and we can't use Awake in this function
+      // using Awake in another function is not logical
+      if (GridHandler.isNodeWalkable[GridHandler.CalculateIndex(endPosition)] == false)
+         return new List<Vector3>();
 
       PathNode startNode = pathNodeArray[GridHandler.CalculateIndex(startPosition)];
       startNode.gCost = 0;
