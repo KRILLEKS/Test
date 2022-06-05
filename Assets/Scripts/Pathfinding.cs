@@ -39,14 +39,14 @@ public class Pathfinding
 
    private static readonly int2[] neighbourOffsetsArray =
    {
-      new (1, 0), // right
-      new (-1, 0), // left 
-      new (0, 1), // up
-      new (0, -1), // down
-      new (1, 1), // right up
-      new (-1, 1), // left up
-      new (1, -1), // right down
-      new (-1, -1), // left down
+      new int2(1, 0), // right
+      new int2(-1, 0), // left 
+      new int2(0, 1), // up
+      new int2(0, -1), // down
+      new int2(1, 1), // right up
+      new int2(-1, 1), // left up
+      new int2(1, -1), // right down
+      new int2(-1, -1), // left down
    };
 
    public static List<Vector3> FindPath(int2 startPosition, int2 endPosition)
