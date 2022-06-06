@@ -78,6 +78,8 @@ public class PlayerMovementController : MonoBehaviour
 
             yield return null;
          }
+         
+         PlayerController.UpdateCrystalInfoStatic();
       }
 
       onStopEvent.Invoke();

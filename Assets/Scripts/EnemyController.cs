@@ -59,7 +59,7 @@ public class EnemyController : MonoBehaviour
          {
             int neighbourIndex = GridHandler.CalculateIndex(transform.position + _neighbours[i]);
 
-            if (GridHandler.isPositionInsideGrid(transform.position + _neighbours[i]) && GridHandler.isNodeWalkable[neighbourIndex])
+            if (GridHandler.IsPositionInsideGrid(transform.position + _neighbours[i]) && GridHandler.isNodeWalkable[neighbourIndex])
                possibleMoves.Add(transform.position + _neighbours[i]);
          }
 
@@ -73,7 +73,7 @@ public class EnemyController : MonoBehaviour
    {
       // we want to "unlock" tile
       GridHandler.isNodeWalkable[_index] = true;
-      EnemySpawner.enemiesAmount--;
+      EnemySpawner.enemiesList.Remove(gameObject);
       Destroy(gameObject); // coroutine will be destroyed with this obj
    }
 }

@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
    [SerializeField] private GameObject enemyHolder;
    
    // public static variables
-   public static int enemiesAmount = 0;
+   public static List<GameObject> enemiesList = new List<GameObject>();
    // private variables
    private List<int> _spawnPoints = new List<int>(); // indexes
 
@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
    {
       while (true)
       {
-         if (enemiesAmount >= maxEnemiesCount)
+         if (enemiesList.Count >= maxEnemiesCount)
          {
             yield return null;
             continue;
@@ -64,8 +64,8 @@ public class EnemySpawner : MonoBehaviour
          int spawnPointIndex = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
          Vector3 position = GridHandler.CalculatePosition(spawnPointIndex) + Constants.OFFSET + new Vector3(0,Constants.PLAYER_Y,0);
 
-         Instantiate(enemyPrefab, position, quaternion.identity, enemyHolder.transform);
-         enemiesAmount++;
+         var enemy = Instantiate(enemyPrefab, position, quaternion.identity, enemyHolder.transform);
+         enemiesList.Add(enemy);
 
          yield return new WaitForSeconds(spawnRate);
       }

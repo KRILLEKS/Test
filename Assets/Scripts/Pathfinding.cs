@@ -110,7 +110,7 @@ public class Pathfinding
                continue;
 
             // change neighbour node values
-            int currentGCost = currentNode.gCost + CalculateDistanceCost(currentNode.Position(), neighbourPos);
+            int currentGCost = currentNode.gCost + GridHandler.CalculateDistanceCost(currentNode.Position(), neighbourPos);
             if (currentGCost < neighbourNode.gCost)
             {
                neighbourNode.cameFromNodeIndex = currentNodeIndex;
@@ -145,7 +145,7 @@ public class Pathfinding
                pathNode.index = GridHandler.CalculateIndex(x, y);
 
                pathNode.gCost = int.MaxValue; // we will change this so value doesn't really matter
-               pathNode.hCost = CalculateDistanceCost(new int2(x, y), endPosition);
+               pathNode.hCost = GridHandler.CalculateDistanceCost(new int2(x, y), endPosition);
                pathNode.CalculateFCost();
 
                pathNode.isWalkable = GridHandler.isNodeWalkable[pathNode.index];
@@ -153,17 +153,6 @@ public class Pathfinding
 
                pathNodeArray[pathNode.index] = pathNode;
             }
-      }
-
-
-
-      int CalculateDistanceCost(int2 aPos, int2 bPos)
-      {
-         int xDistance = math.abs(aPos.x - bPos.x);
-         int yDistance = math.abs(aPos.y - bPos.y);
-         int remaining = math.abs(xDistance - yDistance);
-
-         return Constants.MOVE_DIAGONAL_COST * math.min(xDistance, yDistance) + Constants.MOVE_STRAIGHT_COST * remaining;
       }
 
       int GetLowestFCostNodeIndex(List<int> openList, PathNode[] pathNodeArray)

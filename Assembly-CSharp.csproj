@@ -54,6 +54,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\UI\StartScreen.cs" />
      <Compile Include="Assets\Scripts\Pathfinding.cs" />
+     <Compile Include="Assets\Scripts\PlayerRecord.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\CrystalGenerator.cs" />
      <Compile Include="Assets\Scripts\InputController.cs" />
@@ -62,9 +63,10 @@
      <Compile Include="Assets\Scripts\PlayerMovementController.cs" />
      <Compile Include="Assets\Scripts\GridHandler.cs" />
      <Compile Include="Assets\Scripts\TEST.cs" />
-     <Compile Include="Assets\Scripts\EnemySpawner.cs" />
-     <Compile Include="Assets\Scripts\GenerateGrid.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\EnemySpawner.cs" />
+     <Compile Include="Assets\Scripts\UI\DeathScreen.cs" />
+     <Compile Include="Assets\Scripts\GenerateGrid.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

@@ -15,11 +15,10 @@ public class CrystalGenerator : MonoBehaviour
    [SerializeField] private GameObject crystalHolder;
 
    // public static variables
-   public static int crystalsAmount = 0;
-   
+   public static readonly Dictionary<int, GameObject> _currentCrystals = new Dictionary<int, GameObject>(); // crystal, index
+
    // static private variables
    private static readonly List<int> _possibleCrystalSpawnPoints = new List<int>(); // it's list of indexes
-   private static Dictionary<int, GameObject> _currentCrystals = new Dictionary<int, GameObject>(); // crystal, index
 
    // invokes after generate grid
    private void Awake()
@@ -48,8 +47,8 @@ public class CrystalGenerator : MonoBehaviour
       _currentCrystals.Add(index, crystal);
 
       _possibleCrystalSpawnPoints.Remove(index);
-
-      crystalsAmount++;
+      
+      PlayerController.UpdateCrystalInfoStatic();
    }
 
 
@@ -74,7 +73,7 @@ public class CrystalGenerator : MonoBehaviour
          Destroy(_currentCrystals[index]);
          _currentCrystals.Remove(index);
          _possibleCrystalSpawnPoints.Add(index);
-         crystalsAmount--;
+         PlayerController.UpdateCrystalInfoStatic();
       }
    }
    

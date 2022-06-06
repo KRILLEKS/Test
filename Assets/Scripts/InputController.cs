@@ -21,7 +21,7 @@ public class InputController : MonoBehaviour
    {
       // TODO: prevent clicking through UI
       // handle keys press
-      if (Input.GetKeyDown(KeyCode.Mouse0))
+      if (Input.touches[0].phase == TouchPhase.Ended)
          onLeftClick.Invoke();
       
       // get mouse position

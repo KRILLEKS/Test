@@ -77,7 +77,7 @@ public class GenerateGrid : MonoBehaviour
                      Vector3 position = new Vector3(x, Constants.PLAYER_Y, y) + new Vector3(i * direction.x, 0, i * direction.y);
                      int index = GridHandler.CalculateIndex(position);
 
-                     if (GridHandler.isPositionInsideGrid(position) && GridHandler.isNodeWalkable[index])
+                     if (GridHandler.IsPositionInsideGrid(position) && GridHandler.isNodeWalkable[index])
                      {
                         Instantiate(borderTile, position + Constants.OFFSET, Quaternion.identity, borderTilesHolder.transform);
                         GridHandler.isNodeWalkable[index] = false;
